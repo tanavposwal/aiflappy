@@ -22,6 +22,8 @@ BASE_IMG = pygame.transform.scale2x(
 )
 BG_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("assets", "bg.png")))
 STAT_FONT = pygame.font.SysFont("comicsans", 30)
+win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
+pygame.display.set_caption("Flappy Bird AI")
 
 
 class Bird:
@@ -180,7 +182,7 @@ def draw_window(win, birds, pipes, base, score, gen, live):
     pygame.display.update()
 
 
-def main(genomes, config):
+def eval_genomes(genomes, config):
     global GEN
     GEN += 1
     nets = []
@@ -197,8 +199,7 @@ def main(genomes, config):
     base = Base(730)
     score = 0
     pipes = [Pipe(600)]
-    win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
-    pygame.display.set_caption("Flappy Bird")
+
     clock = pygame.time.Clock()
 
     run = True
@@ -286,7 +287,7 @@ def run(config_path):
     p = neat.Population(config)
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
-    winner = p.run(main, 50)
+    winner = p.run(eval_genomes, 50)
     print("\nBest genome:\n{!s}".format(winner))
 
 
