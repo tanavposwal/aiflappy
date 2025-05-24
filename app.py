@@ -109,7 +109,7 @@ class Pipe:
         self.set_height()
 
     def set_height(self):
-        self.height = random.randrange(50, 450)
+        self.height = random.randrange(30, 470)
         self.top = self.height - self.PIPE_TOP.get_height()
         self.bottom = self.height + self.GAP
 
@@ -260,7 +260,7 @@ def main(genomes, config):
             for g in ge:
                 # all genome will have +5
                 g.fitness += 5
-            pipes.append(Pipe(700))
+            pipes.append(Pipe(600))
 
         for r in rem:
             pipes.remove(r)
